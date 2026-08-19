@@ -215,8 +215,8 @@
       <div class="flow-step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <h4>AI 卡關原因判斷</h4>
-          <p>Gemini AI 判斷「沒談到高階 / 信任不足 / 沒參加活動 / 場景模糊」（可多選），結果快取避免重複呼叫</p>
+          <h4>AI 八大卡關根因判斷</h4>
+          <p>Gemini AI 綜合互動與痛點/需求/洞察資料，研判卡關根因（可多選，見下方八大根因表），結果快取避免重複呼叫</p>
         </div>
       </div>
       <div class="flow-step">
@@ -243,15 +243,22 @@
       <div class="flow-step">
         <div class="step-num">7</div>
         <div class="step-content">
-          <h4>個人化業務話術生成</h4>
-          <p>Gemini AI 結合痛點、卡關原因、推薦活動生成針對每筆商機的業務突破話術（15 執行緒平行）</p>
+          <h4>不卡關內容推薦</h4>
+          <p>依 AI 判斷卡關根因與客戶行業，從內容素材庫（活動 / 知識庫 / 外部文章）語意比對推薦 1–3 則相關素材</p>
         </div>
       </div>
       <div class="flow-step">
         <div class="step-num">8</div>
         <div class="step-content">
+          <h4>個人化業務話術生成</h4>
+          <p>Gemini AI 結合痛點、卡關根因、推薦活動生成針對每筆商機的業務突破話術（15 執行緒平行）</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">9</div>
+        <div class="step-content">
           <h4>Excel 輸出</h4>
-          <p>輸出含 112 個欄位的完整分析結果，供業務人員每日使用</p>
+          <p>輸出完整分析結果（含卡關根因、推薦活動、推薦內容、業務話術），供業務人員每日使用</p>
         </div>
       </div>
     </div>
@@ -268,15 +275,18 @@ flowchart TD
     C -->|31–60天| D[現行卡關]
     C -->|超過60天 + 近期有日報| E[逾期卡關]
     D & E --> F[互動欄位計算]
-    F --> G[AI 卡關原因判斷\nGemini AI]
+    F --> G[AI 八大卡關根因判斷\nGemini AI]
     G --> H[痛點 / 需求 / 洞察整合]
+    G --> N[不卡關內容推薦\nGemini 語意比對]
     H --> I[經營狀況判斷]
     I --> J[商機等級判斷]
     J -->|移除 D 級逾期卡關| K[活動推薦]
     K --> L[AI 業務話術生成\nGemini AI]
     L --> M[每日 Excel 輸出]
+    N --> M
     style G fill:#1a56db,color:#fff,rx:8
     style L fill:#1a56db,color:#fff,rx:8
+    style N fill:#1a56db,color:#fff,rx:8
       </div>
     </div>
   </section>
@@ -306,25 +316,18 @@ flowchart TD
     </div>
 
     <div class="card">
-      <h3>四種卡關類別（可多選）</h3>
+      <h3>AI 八大卡關根因（可多選）</h3>
+      <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:12px;">由 Gemini 綜合客戶互動與痛點/需求/洞察資料研判，取代舊版 4 類規則式判斷</p>
       <table>
-        <tr><th>卡關類別</th><th>判斷依據</th></tr>
-        <tr>
-          <td><span class="tag tag-red">沒談到高階</span></td>
-          <td>近期無高階主管或核決者接觸記錄</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-amber">信任不足</span></td>
-          <td>客戶需求、洞察、解決方案記錄不完整</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-blue">沒參加活動</span></td>
-          <td>近期無 AiGP 活動參與記錄</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-red">場景模糊</span></td>
-          <td>痛點、需求、洞察資料缺乏</td>
-        </tr>
+        <tr><th>根因類型</th><th>定義</th></tr>
+        <tr><td><span class="tag tag-red">預算/成本疑慮</span></td><td>客戶認同方案但卡在價格、預算週期或 ROI 說服力不足</td></tr>
+        <tr><td><span class="tag tag-amber">決策層未參與</span></td><td>目前僅接觸到基層/中階窗口，尚未觸及有決策權的人</td></tr>
+        <tr><td><span class="tag tag-blue">技術驗證中</span></td><td>客戶要求先看 Demo、POC 或實際運作證明才敢往下談</td></tr>
+        <tr><td><span class="tag tag-red">需求尚未聚焦</span></td><td>客戶還在探索階段，痛點模糊、沒有明確要解決的問題</td></tr>
+        <tr><td><span class="tag tag-amber">競品/市場觀望</span></td><td>客戶正在比較其他廠商方案，或在觀望市場趨勢再決定</td></tr>
+        <tr><td><span class="tag tag-blue">內部流程延遲</span></td><td>客戶內部審批、跨部門協調或組織調整導致進度卡住</td></tr>
+        <tr><td><span class="tag tag-red">信任尚待建立</span></td><td>客戶對廠商/方案的可靠度、實績還存疑，需要案例佐證</td></tr>
+        <tr><td><span class="tag tag-amber">方案未完整呈現</span></td><td>業務尚未把完整解決方案/效益具體說明給客戶聽</td></tr>
       </table>
     </div>
 
@@ -375,6 +378,20 @@ flowchart LR
     </div>
   </section>
 
+  <!-- 不卡關內容推薦 -->
+  <section>
+    <h2>不卡關內容推薦</h2>
+    <div class="card">
+      <table>
+        <tr><th>項目</th><th>說明</th></tr>
+        <tr><td>素材類型</td><td>活動（activity）／知識庫（knowledge）／外部文章（external）</td></tr>
+        <tr><td>比對依據</td><td>AI 判斷卡關根因 + 客戶所屬行業，語意比對候選素材</td></tr>
+        <tr><td>推薦數量</td><td>1–3 則，依相關度排序</td></tr>
+        <tr><td>Fallback</td><td>無明確卡關根因時依行業分流回傳全部候選；Gemini 呼叫失敗時回傳全部候選</td></tr>
+      </table>
+    </div>
+  </section>
+
   <!-- 話術生成 -->
   <section>
     <h2>業務話術生成</h2>
@@ -382,7 +399,7 @@ flowchart LR
       <div class="mermaid">
 flowchart LR
     A[客戶痛點\n需求\n洞察] --> D[Gemini AI\ngemini-2.5-pro]
-    B[卡關類型\n卡關類別\n經營狀況] --> D
+    B[卡關類型\nAI 卡關根因\n經營狀況] --> D
     C[推薦活動\n信任類型\n聯絡人姓名] --> D
     D --> E[個人化業務突破話術]
       </div>
@@ -420,23 +437,7 @@ flowchart LR
       </div>
     </div>
     <div class="card">
-      <h3>卡關類別分布</h3>
-      <div class="bar-container">
-        <div class="bar-label"><span>沒談到高階</span><span>81.7%</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:81.7%"></div></div>
-      </div>
-      <div class="bar-container">
-        <div class="bar-label"><span>信任不足</span><span>81.7%</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:81.7%"></div></div>
-      </div>
-      <div class="bar-container">
-        <div class="bar-label"><span>沒參加活動</span><span>63.0%</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:63%"></div></div>
-      </div>
-      <div class="bar-container">
-        <div class="bar-label"><span>場景模糊</span><span>38.9%</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:38.9%"></div></div>
-      </div>
+      <p style="color:var(--text-muted);font-size:.9rem;">卡關根因判斷已由原本 4 類規則式判斷，改版為 Gemini AI 綜合研判的八大根因（見上「AI 八大卡關根因」），故不再附上舊版分布數字。</p>
     </div>
   </section>
 
@@ -459,7 +460,7 @@ flowchart LR
 </main>
 
 <footer>
-  <p>AiGP 卡關商機分析系統 &nbsp;|&nbsp; 最後更新：2026-06-11</p>
+  <p>AiGP 卡關商機分析系統 &nbsp;|&nbsp; 最後更新：2026-08-19</p>
 </footer>
 
 <script>
